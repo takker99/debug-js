@@ -22,8 +22,7 @@ export const createDebug = (filename: string): Console =>
         case "error":
           return [
             key,
-            (...args: unknown[]) =>
-              value(`%c${filename}`, "color: gray", ...args),
+            (...args: unknown[]) => value(`%c${filename}`, gray, ...args),
           ];
         case "log":
         case "info":
@@ -34,7 +33,7 @@ export const createDebug = (filename: string): Console =>
             ) {
               return;
             }
-            value(`%c${filename}`, "color: gray", ...args);
+            value(`%c${filename}`, gray, ...args);
           }];
         case "assert":
           return [key, (assertion: boolean, ...args: unknown[]) => {
@@ -43,7 +42,7 @@ export const createDebug = (filename: string): Console =>
             ) {
               return;
             }
-            value(assertion, `%c${filename}`, "color: gray", ...args);
+            value(assertion, `%c${filename}`, gray, ...args);
           }];
         case "time":
         case "timeEnd":
@@ -67,3 +66,5 @@ export const createDebug = (filename: string): Console =>
       }
     },
   )) as unknown as Console;
+
+const gray = "color: gray";
